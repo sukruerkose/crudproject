@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Giriş Yapıldı. Hoşgeldiniz.</h2>
+    <form autocomplete="off" action="#" th:action="@{/addBook}" th:object="${book}" method="post">
+        <label>Adnız </label>
+        <input type="text" id="authorName" placeholder="First Name" th:field="*{authorName}" class="form-control"/><br/>
+
+        <label>Kitap Adı </label>
+        <input type="text" id="bookName" placeholder="Book Name" th:field="*{bookName}" class="form-control"/><br/>
+
+        <button type="submit" class="btn btn-success text-center form-control">Kaydet</button>
+    </form>
+</div>
+</body>
+</html>
