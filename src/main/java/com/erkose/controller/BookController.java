@@ -1,11 +1,8 @@
 package com.erkose.controller;
 
-import com.erkose.dto.BookDto;
 import com.erkose.model.Book;
 import com.erkose.repository.BookRepository;
-import com.erkose.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,23 +14,19 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
-    private final BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public BookController() {
     }
 
     @GetMapping("/addBook")
-    public List<BookDto> book(Model model, Book book){
+    public String book(Model model){
         model.addAttribute("book",new Book());
-        model.addAttribute("authorName",book.getAuthorName());
-        model.addAttribute("bookName",book.getBookName());
-        return bookService.getAll();
+        return "book";
     }
     @PostMapping("/addBook")
-    public List<BookDto> saveBook(@RequestBody BookDto bookDto, Model model){
-        model.addAttribute("book",bookDto);
-        return (List<BookDto>) bookService.save(bookDto);
+    public String saveBook(@RequestBody Book book,Model model){
+        model.addAttribute("book",book);
+        bookRepository.save(book);
+        return "Added book with id : " + book.getId();
     }
     @GetMapping("/findAllBooks")
     public List<Book> getBooks(){
